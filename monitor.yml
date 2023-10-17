@@ -2,9 +2,8 @@ version: '3.7'
 
 networks:
   monitoring:
+    name: monitoring
     driver: bridge
-  snode_monitoring:
-    external: true
 
 volumes:
   prometheus_data: {}
@@ -30,7 +29,6 @@ services:
       - 9090:9090
     networks:
       - monitoring
-      - snode_monitoring
   blackbox-exporter:
     image: quay.io/prometheus/blackbox-exporter:latest
     container_name: blackbox-exporter
@@ -44,7 +42,6 @@ services:
       - 9115
     networks:
       - monitoring
-      - snode_monitoring
     # speedtest-exporter:
     #   image: miguelndecarvalho/speedtest-exporter
     #   container_name: speedtest-exporter
