@@ -1,0 +1,6 @@
+- targets:
+  - ['node-exporter:9100']
+  - ['gs-punter:9100']
+  - ['gs-placekicker:9100']
+  labels:
+    job_name: "node"
