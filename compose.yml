@@ -28,19 +28,6 @@ services:
       - 9090:9090
     networks:
       - monitoring
-  # RANDOM PY
-  randompy:
-
-    container_name: randompy
-    build:
-      context: ./randompy
-      dockerfile: randompy/Dockerfile
-    restart: unless-stopped
-    expose:
-      - 8000
-    networks:
-      - monitoring
-
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
@@ -58,16 +45,6 @@ services:
       - 9100
     networks:
       - monitoring
-    # speedtest-exporter:
-    #   image: miguelndecarvalho/speedtest-exporter
-    #   container_name: speedtest-exporter
-    #   environment:
-    #     - SPEEDTEST_SERVER=<server-id> #optional
-    #   ports:
-    #     - 9798:9798
-    #   restart: unless-stopped
-    #   networks:
-    #     - monitoring
   blackbox-exporter:
     image: quay.io/prometheus/blackbox-exporter:latest
     container_name: blackbox-exporter
@@ -81,3 +58,13 @@ services:
       - 9115
     networks:
       - monitoring
+    # speedtest-exporter:
+    #   image: miguelndecarvalho/speedtest-exporter
+    #   container_name: speedtest-exporter
+    #   environment:
+    #     - SPEEDTEST_SERVER=<server-id> #optional
+    #   ports:
+    #     - 9798:9798
+    #   restart: unless-stopped
+    #   networks:
+    #     - monitoring
