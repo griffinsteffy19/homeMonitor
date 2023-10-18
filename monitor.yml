@@ -2,8 +2,7 @@ version: '3.7'
 
 networks:
   monitoring:
-    name: monitoring
-    driver: bridge
+    external: true
 
 volumes:
   prometheus_data: {}
