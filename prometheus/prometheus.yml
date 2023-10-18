@@ -1,0 +1,61 @@
+# my global config
+global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.=
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+
+  # - file_sd_configs:
+  #   job_name: "node"
+  #   # files must contain a list of file patterns for files with scrape targets.
+  #   # The last path segment can contain `*`, which matches any number of chars in file name.
+  #   - files:
+  #     - targets.yaml
+  #     refresh_interval: 5s
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+  - job_name: "rand"
+    static_configs:
+      - targets: ["randompy:8000"]
+  - job_name: "node"
+    file_sd_configs:
+      - files:
+        - "targets.json"
+        refresh_interval: 1m
+    # static_configs:
+    #   - targets: ['node-exporter:9100']
+    #     labels:
+    #       machine_name: 'gs-placekicker'
+      # - targets: ['gs-punter:9100']
+      #   labels:
+      #     machine_name: 'gs-punter'
+  # - job_name: 'wgexporter'
+  #   static_configs:
+  #     - targets: ['gs-punter:9586']
+  - job_name: 'blackbox_exporter'  # collect blackbox exporter's operational metrics.
+    static_configs:
+      - targets: ['blackbox-exporter:9115']
+  - job_name: "blackbox-ping"
+    metrics_path: /probe
+    params:
+      module: [icmp]
+    static_configs:
+      - targets: ['gs-gunner.local']  # <== Put here your targets
+    relabel_configs:    # <== This comes from the blackbox exporter README
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115 # Blackbox exporter.

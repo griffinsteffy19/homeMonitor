@@ -1,0 +1,1 @@
+cp prometheus.yml /etc/prometheus/prometheus.yml

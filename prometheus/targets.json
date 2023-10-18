@@ -1,0 +1,23 @@
+[
+  {
+    "targets": ["gs-punter:9100"],
+    "labels": {
+      "job": "node",
+      "group": "test1"
+    }
+  },
+  {
+    "targets": ["gs-placekicker:9100"],
+    "labels": {
+      "job": "node",
+      "group": "test2"
+    }
+  },
+  {
+    "targets": ["node-exporter:9100"],
+    "labels": {
+      "job": "node",
+      "group": "test3"
+    }
+  }
+]
