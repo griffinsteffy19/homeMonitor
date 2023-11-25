@@ -3,21 +3,35 @@
     "targets": ["gs-punter:9100"],
     "labels": {
       "job": "node",
-      "group": "test1"
+      "host": "gs-punter"
     }
   },
   {
     "targets": ["gs-placekicker:9100"],
     "labels": {
       "job": "node",
-      "group": "test2"
+      "host": "gs-placekicker"
     }
   },
   {
     "targets": ["node-exporter:9100"],
     "labels": {
       "job": "node",
-      "group": "test3"
+      "host": "gs-coach"
+    }
+  },
+  {
+    "targets": ["gs-quarterback:9100"],
+    "labels": {
+      "job": "node",
+      "host": "gs-quarterback"
+    }
+  },
+  {
+    "targets": ["gs-gunner:9100"],
+    "labels": {
+      "job": "node",
+      "host": "gs-gunner"
     }
   }
 ]
